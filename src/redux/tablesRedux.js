@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { API_URL } from '../config';
 
 
 //selectors
@@ -16,7 +17,7 @@ export const editTable = (payload) => ({ type: EDIT_TABLE, payload });
 
 export const fetchTables = () => {
   return (dispatch) => {
-  fetch('http://localhost:3131/api/tables')
+  fetch(`${API_URL}/tables`)
     .then((res) => res.json())
     .then((tables) => dispatch(updateTables(tables)));
   };
@@ -37,7 +38,7 @@ export const editTableRequest = (table) => {
       }),
     };
 
-    fetch(`http://localhost:3131/tables/${table.id}`, options).then(() =>
+    fetch(`${API_URL}/tables/${table.id}`, options).then(() =>
       dispatch(editTable(table))
     );
   };
